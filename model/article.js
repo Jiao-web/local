@@ -17,6 +17,15 @@ class Article {
     });
   }
 
+  static hottag(cb) {
+    let sql = `SELECT keyword from keyword`;
+    pool.getConnection(function(err, connection){
+      if (err) return cb(err);
+      connection.query(sql, cb);
+      connection.release();
+    });
+  }
+
   static find(id, cb) {
     let sql = `SELECT * from eyny_tbl where id=${id}`;
     pool.getConnection(function(err, connection){

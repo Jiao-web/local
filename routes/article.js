@@ -35,4 +35,11 @@ router.get('/emotion', function(req, res, next) {
   });
 });
 
+router.get('/hottags', function(req, res, next) {
+  Article.hottag((error, results) => {
+    if (error) throw error;
+    res.send(results);
+  });
+});
+
 module.exports = router;
