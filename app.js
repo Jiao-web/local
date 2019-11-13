@@ -7,6 +7,7 @@ var ejs = require('ejs');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var articleRouter = require('./routes/article');
+var tianyaRouter = require('./routes/tianya');
 var indexRouter = require('./routes/index');
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/article', articleRouter);
+app.use('/tianya', tianyaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
