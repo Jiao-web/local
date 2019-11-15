@@ -7,7 +7,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/community', (req, res, next) => {
-  res.render('../public/assets/graph/graph.html');
+  res.render('../views/graph/graph.html');
+});
+
+router.get('/tree', (req, res, next) => {
+  res.render('../views/tree/tree.html');
 });
 
 module.exports = router;

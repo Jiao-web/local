@@ -40,11 +40,28 @@ class Tianya {
 
   static find(user_id, cb) {
     const sql = `select * from user_tbl where id=${user_id}`;
+    console.log(sql);
+    
     pool.getConnection(function(err, connection){
       if (err) return cb(err);
       connection.query(sql, cb);
       connection.release();
     });
+  }
+
+  static profile(user_id, cb) {
+    const sql = `select user_tbl.id, user_tbl.user_id, user_tbl.user, 
+    user_tbl.follow, user_tbl.fans, user_tbl.touxiang, user_tbl.community, 
+    count(user_item_tbl.title) as article_cnt from user_tbl left join 
+    user_item_tbl on user_tbl.user_id = user_item_tbl.user_id 
+    where user_tbl.id = ${user_id}`;
+
+    pool.getConnection(function(err, connection){
+      if (err) return cb(err);
+      connection.query(sql, cb);
+      connection.release();
+    });
+
   }
 }
 
