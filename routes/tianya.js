@@ -2,6 +2,7 @@ var express = require('express');
 var Tianya = require('../model/tianya');
 var router = express.Router();
 var fs = require('fs');
+var path = require("path");
 
 router.get('/page', function(req, res, next) {
   const filter = req.query;
@@ -42,7 +43,7 @@ router.get('/community', function(req, res, next) {
     if (results.length === 0) {
       res.send({msg: 'cannot find special community!'});
     } else {
-      const community_file = './public/assets/graph/mock_graph.json'; //results[0];
+      const community_file = path.join(__dirname, '../views/graph/mock_graph.json'); //results[0];
       fs.readFile(community_file, (err, data) => {
         if (err) {
           return next(err);
@@ -73,6 +74,15 @@ router.get('/recommend', function(req, res, next) {
       },
     ]
     res.send({msg: 'ok', data: _mock_recommend});
+  });
+});
+
+router.get('/avatar', function(req, res, next) {
+  const tianya_user_id = req.query.tianya_user_id;
+  
+  Tianya.find(tianya_user_id, (error, results) => {
+    if (error) throw error;
+    res.sendFile(path.join(__dirname, '../public/assets/tmp/img/avatar.jpg'));
   });
 });
 
