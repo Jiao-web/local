@@ -13,7 +13,7 @@ var myChart = echarts.init(dom);
 var app = {};
 option = null;
 myChart.showLoading();
-$.get('assets/mock_tree.json', function (data) {
+$.get("http://10.10.10.60:8080/AITextRecommand/NodeCluster?clusternum=4", function (data) {
     myChart.hideLoading();
 
     myChart.setOption(option = {

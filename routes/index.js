@@ -11,7 +11,9 @@ router.get('/community', (req, res, next) => {
 });
 
 router.get('/tree', (req, res, next) => {
-  res.render('../views/tree/tree.html');
+  const clusternum = req.query.clusternum;
+  const tree_url = `http://10.10.10.60:8080/AITextRecommand/NodeCluster?clusternum=${clusternum}`
+  res.render('../views/tree/tree.html', { 'tree_url': tree_url });
 });
 
 module.exports = router;
