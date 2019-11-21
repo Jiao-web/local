@@ -61,7 +61,16 @@ class Tianya {
       connection.query(sql, cb);
       connection.release();
     });
+  }
 
+  static recommend(user_id, cb) {
+    const sql = `select * from recommend_tbl where user_id = ${user_id}`;
+
+    pool.getConnection(function(err, connection){
+      if (err) return cb(err);
+      connection.query(sql, cb);
+      connection.release();
+    });
   }
 }
 

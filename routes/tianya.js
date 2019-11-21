@@ -56,24 +56,9 @@ router.get('/community', function(req, res, next) {
 
 router.get('/recommend', function(req, res, next) {
   const tianya_user_id = req.query.tianya_user_id;
-  Tianya.find(tianya_user_id, (error, results) => {
+  Tianya.recommend(tianya_user_id, (error, results) => {
     if (error) throw error;
-    // get recommend of tianya user
-    _mock_recommend = [
-      {
-        name: '婆媳关系',
-        value: 5 
-      },
-      {
-        name: '国际关系',
-        value: 3 
-      },
-      {
-        name: '台海风云',
-        value: 2 
-      },
-    ]
-    res.send({msg: 'ok', data: _mock_recommend});
+    res.send({msg: 'ok', data: results});
   });
 });
 
